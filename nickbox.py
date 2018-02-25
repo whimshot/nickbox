@@ -43,9 +43,7 @@ GPIO.add_event_detect(13, GPIO.FALLING, callback=fire_nick, bouncetime=300)
 while True:
     page = requests.get('http://isnickfired.com')
     tree = html.fromstring(page.content)
-
     status = tree.xpath('//h1[@class="cover-heading"]/text()')
-
     message = status[0][8:]
     lcd.message(message)
     time.sleep(60)
