@@ -35,7 +35,7 @@ def is_nick_fired():
         tree = html.fromstring(page.content)
         status = tree.xpath('//h1[@class="cover-heading"]/text()')
         message = status[0][8:]
-    except (ConnectionError):
+    except (requests.exceptions.RequestException):
         message = 'Connection Failure'
     finally:
         return message
@@ -52,7 +52,7 @@ def hire_nick(channel):
     try:
         requests.post('http://isnickfired.com/status/notfired')
         message = is_nick_fired()
-    except (ConnectionError):
+    except (requests.exceptions.RequestException):
         message = 'Connection Failure'
     finally:
         update_display(message)
@@ -63,7 +63,7 @@ def fire_nick(channel):
     try:
         requests.post('http://isnickfired.com/status/fired')
         message = is_nick_fired()
-    except (ConnectionError):
+    except (requests.exceptions.RequestException):
         message = 'Connection Failure'
     finally:
         update_display(message)
