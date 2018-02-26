@@ -84,6 +84,7 @@ def fire_nick(channel):
 
 GPIO.add_event_detect(12, GPIO.FALLING, callback=hire_nick, bouncetime=300)
 GPIO.add_event_detect(13, GPIO.FALLING, callback=fire_nick, bouncetime=300)
+update_display('Checking Status')
 
 while True:
     message = is_nick_fired()
