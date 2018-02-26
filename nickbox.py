@@ -41,7 +41,8 @@ def is_nick_fired():
         message = status[0][8:]
     except (requests.exceptions.ConnectionError,
             urllib3.exceptions.NewConnectionError,
-            urllib3.exceptions.MaxRetryError):
+            urllib3.exceptions.MaxRetryError,
+            socket.timeout):
         message = 'Connection\nFailure'
     finally:
         return message
