@@ -1,6 +1,7 @@
 '''A simple program to drive buttons to hire and fire Nick'''
 import time
 import requests
+import socket
 import RPi.GPIO as GPIO
 import Adafruit_CharLCD as LCD
 from lxml import html
@@ -35,7 +36,7 @@ def is_nick_fired():
         tree = html.fromstring(page.content)
         status = tree.xpath('//h1[@class="cover-heading"]/text()')
         message = status[0][8:]
-    except (requests.exceptions.RequestException):
+    except (requests.exceptions.RequestException, socket.timout):
         message = 'Connection Failure'
     finally:
         return message
@@ -52,7 +53,7 @@ def hire_nick(channel):
     try:
         requests.post('http://isnickfired.com/status/notfired')
         message = is_nick_fired()
-    except (requests.exceptions.RequestException):
+    except (requests.exceptions.RequestException, socket.timout):
         message = 'Connection Failure'
     finally:
         update_display(message)
@@ -63,7 +64,7 @@ def fire_nick(channel):
     try:
         requests.post('http://isnickfired.com/status/fired')
         message = is_nick_fired()
-    except (requests.exceptions.RequestException):
+    except (requests.exceptions.RequestException, socket.timout):
         message = 'Connection Failure'
     finally:
         update_display(message)
