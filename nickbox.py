@@ -28,24 +28,51 @@ lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,
                            lcd_columns, lcd_rows, lcd_backlight)
 
 
+def is_nick_fired():
+    '''query isnickfired.com'''
+    try:
+        page = requests.get('http://isnickfired.com')
+        tree = html.fromstring(page.content)
+        status = tree.xpath('//h1[@class="cover-heading"]/text()')
+        message = status[0][8:]
+    except (ConnectionError):
+        message = 'Connection Failure'
+    finally:
+        return message
+
+
+def update_display(message):
+    '''update the lcd display with message'''
+    lcd.clear()
+    lcd.message(message)
+
+
 def hire_nick(channel):
     '''Callback for button to hire Nick'''
-    requests.post('http://isnickfired.com/status/notfired')
+    try:
+        requests.post('http://isnickfired.com/status/notfired')
+        message = is_nick_fired()
+    except (ConnectionError):
+        message = 'Connection Failure'
+    finally:
+        update_display(message)
 
 
 def fire_nick(channel):
     '''Callback for buttonn to fire Nick'''
-    requests.post('http://isnickfired.com/status/fired')
+    try:
+        requests.post('http://isnickfired.com/status/fired')
+        message = is_nick_fired()
+    except (ConnectionError):
+        message = 'Connection Failure'
+    finally:
+        update_display(message)
 
 
 GPIO.add_event_detect(12, GPIO.FALLING, callback=hire_nick, bouncetime=300)
 GPIO.add_event_detect(13, GPIO.FALLING, callback=fire_nick, bouncetime=300)
 
 while True:
-    page = requests.get('http://isnickfired.com')
-    tree = html.fromstring(page.content)
-    status = tree.xpath('//h1[@class="cover-heading"]/text()')
-    message = status[0][8:]
-    lcd.message(message)
+    message = is_nick_fired()
+    update_display(message)
     time.sleep(60)
-    lcd.clear()
