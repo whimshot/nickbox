@@ -42,7 +42,7 @@ def is_nick_fired():
     except (requests.exceptions.ConnectionError,
             urllib3.exceptions.NewConnectionError,
             urllib3.exceptions.MaxRetryError):
-        message = 'Connection Failure'
+        message = 'Connection\Failure'
     finally:
         return message
 
@@ -58,8 +58,10 @@ def hire_nick(channel):
     try:
         requests.post('http://isnickfired.com/status/notfired')
         message = is_nick_fired()
-    except (requests.exceptions.RequestException, socket.timeout):
-        message = 'Connection Failure'
+    except (requests.exceptions.ConnectionError,
+            urllib3.exceptions.NewConnectionError,
+            urllib3.exceptions.MaxRetryError):
+        message = 'Connection\Failure'
     finally:
         update_display(message)
 
@@ -69,8 +71,10 @@ def fire_nick(channel):
     try:
         requests.post('http://isnickfired.com/status/fired')
         message = is_nick_fired()
-    except (requests.exceptions.RequestException, socket.timeout):
-        message = 'Connection Failure'
+    except (requests.exceptions.ConnectionError,
+            urllib3.exceptions.NewConnectionError,
+            urllib3.exceptions.MaxRetryError):
+        message = 'Connection\Failure'
     finally:
         update_display(message)
 
