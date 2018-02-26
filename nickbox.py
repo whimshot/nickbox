@@ -3,6 +3,7 @@ import socket
 import time
 
 import requests
+import urllib3
 
 import Adafruit_CharLCD as LCD
 import RPi.GPIO as GPIO
@@ -38,7 +39,9 @@ def is_nick_fired():
         tree = html.fromstring(page.content)
         status = tree.xpath('//h1[@class="cover-heading"]/text()')
         message = status[0][8:]
-    except (requests.exceptions.RequestException, socket.timeout):
+    except (requests.exceptions.ConnectionError,
+            urllib3.exceptions.NewConnectionError,
+            urllib3.exceptions.MaxRetryError):
         message = 'Connection Failure'
     finally:
         return message
