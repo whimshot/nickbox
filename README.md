@@ -2,10 +2,25 @@
 
 A box for nick
 
-## Schematics
+
+## The Hardware
+
+### Parts list
+
+### Schematics
+
+#### Adafruit Trinket, Power/Arming Switch and Pulsating LEDs for Buttons
+
+This controls the power/arming switching and the pulsing LEDs in the
+hired/fired buttons.
 
 ![Adafruit Trinket arming switch schematic](trinket arming switch_schem.png?raw=true "Adafruit Trinket arming switch schematic")
-![RPI and display schematic](rpi and display_schem.png?raw=true "RPI and display schematic")
+
+#### Raspberry Pi Zero W, LCD and Button Switches
+
+This uses the buttons to trigger a call to isnickfired.com
+
+![RPI, LCD Display and Buttons schematic](rpi and display_schem.png?raw=true "RPI and display schematic")
 
 ## Getting Started
 
