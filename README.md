@@ -14,13 +14,13 @@ A box for nick
 This controls the power/arming switching and the pulsing LEDs in the
 hired/fired buttons.
 
-![Adafruit Trinket arming switch schematic](hardware/trinket arming switch_schem.svg?raw=true "Adafruit Trinket arming switch schematic")
+![Adafruit Trinket with Switch and LEDs Schematic](hardware/trinket with switch and leds_schem.png?raw=true "Adafruit Trinket with Switch and LEDs Schematic")
 
 #### Raspberry Pi Zero W, LCD and Button Switches
 
 This uses the buttons to trigger a call to isnickfired.com
 
-![RPI, LCD Display and Buttons schematic](hardware/rpi and display_schem.svg?raw=true "RPI and display schematic")
+![Raspberry Pi Zero W with LCD Display and Buttons Schematic](hardware/rpi and display_schem.svg?raw=true "Raspberry Pi Zero W with LCD Display and Buttons Schematic")
 
 ## Getting Started
 
