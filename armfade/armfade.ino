@@ -1,12 +1,12 @@
 /*
   This is part of the nickbox project. This is written for an
-  Adafruit Trinket which controls the arming switch and the 
+  Adafruit Trinket which controls the arming switch and the
   pulsing lights on the hire/fire buttons.
 */
 
-int green_button_led = 1;         // the PWM pin the green button LED is attached to
+int green_button_led = 1;         // the PWM pin for the green button LED
 int green_button_brightness = 0;  // how bright the green button LED is
-int red_button_led = 0;           // the PWM pin the red button LED is attached to
+int red_button_led = 0;           // the PWM pin for the red button LED
 int red_button_brightness = 255;  // how bright the blue button LED is
 int fadeAmount = 5;               // how many points to fade the LED by
 
