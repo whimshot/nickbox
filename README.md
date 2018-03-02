@@ -4,7 +4,8 @@ A box for nick
 
 ## Schematics
 
-![trinket arming switch schematic](trinket arming switch_schem.png?raw=true "Title")
+![Adafruit Trinket arming switch schematic](trinket arming switch_schem.png?raw=true "Adafruit Trinket arming switch schematic")
+![RPI and display schematic](rpi and display_schem.png?raw=true "RPI and display schematic")
 
 ## Getting Started
 
