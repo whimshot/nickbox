@@ -22,17 +22,27 @@ A box for nick
 | | U2 | 10K Potentiometer  |
 
 
-### Schematics
+### Wiring
 
 #### Adafruit Trinket, Power/Arming Switch and Pulsating LEDs for Buttons
 
 This controls the power/arming switch and the pulsing LEDs in the
 hired/fired buttons.
 
-![Adafruit Trinket with Switch and LEDs Schematic](/hardware/fader_switch_schem.png "Adafruit Trinket with Switch and LEDs Schematic")
+##### Breadboard Layout
+
+![Adafruit Trinket with Switch and LEDs Breadboard](/hardware/trinket_fader_bb.png "Adafruit Trinket with Switch and LEDs Breadboard")
+
+##### Schematic
+
+![Adafruit Trinket with Switch and LEDs Schematic](/hardware/trinket_fader_schem.png "Adafruit Trinket with Switch and LEDs Schematic")
 
 #### Raspberry Pi Zero W, LCD and Button Switches
 
 This uses the buttons to trigger a call to isnickfired.com
+
+##### Breadboard
+
+##### Schematic
 
 ![Raspberry Pi Zero W with LCD Display and Buttons Schematic](/hardware/rpi_lcd_schem.png?raw=true "Raspberry Pi Zero W with LCD Display and Buttons Schematic")
