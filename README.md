@@ -29,7 +29,7 @@ A box for nick
 This controls the power/arming switch and the pulsing LEDs in the
 hired/fired buttons.
 
-[Adafruit Trinket with Switch and LEDs Schematic](hardware/trinket with switch and leds_schem.png?raw=true "Adafruit Trinket with Switch and LEDs Schematic")
+[Adafruit Trinket with Switch and LEDs Schematic](hardware/trinket with switch and leds_schem.png)
 
 #### Raspberry Pi Zero W, LCD and Button Switches
 
