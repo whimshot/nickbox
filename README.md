@@ -43,6 +43,8 @@ This uses the buttons to trigger a call to isnickfired.com
 
 ##### Breadboard
 
+![Raspberry Pi Zero W with LCD Display and Buttons Schematic](/hardware/rpi_lcd_bb.png?raw=true "Raspberry Pi Zero W with LCD Display and Buttons Breadboard")
+
 ##### Schematic
 
 ![Raspberry Pi Zero W with LCD Display and Buttons Schematic](/hardware/rpi_lcd_schem.png?raw=true "Raspberry Pi Zero W with LCD Display and Buttons Schematic")
