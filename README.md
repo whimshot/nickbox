@@ -10,7 +10,7 @@ A box for nick
 
 
 | Trinket Schematic Label | Pi Zero W Schematic Label | Description |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- |
 | Part 1 || Adafruit Trinket 5v  |
 | LED1, R1, &  S1 || Illuminated Toggle Switch with Cover  |
 | LED2, R2  | S1 | Large Arcade Button with LED - 60mm   |
