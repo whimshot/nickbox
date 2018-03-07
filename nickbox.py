@@ -43,7 +43,7 @@ def is_nick_fired():
             urllib3.exceptions.NewConnectionError,
             urllib3.exceptions.MaxRetryError,
             socket.timeout):
-        message = 'Connection\nFailure'
+        message = 'Connect Failed'
     finally:
         return message
 
@@ -65,7 +65,7 @@ def hire_nick(channel):
             urllib3.exceptions.NewConnectionError,
             urllib3.exceptions.MaxRetryError,
             socket.timeout):
-        message = 'Connection\nFailure'
+        message = 'Connect Failed'
     finally:
         update_display(message)
 
@@ -79,7 +79,7 @@ def fire_nick(channel):
             urllib3.exceptions.NewConnectionError,
             urllib3.exceptions.MaxRetryError,
             socket.timeout):
-        message = 'Connection\nFailure'
+        message = 'Connect Failed'
     finally:
         update_display(message)
 
