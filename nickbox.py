@@ -91,4 +91,4 @@ update_display('Checking Status')
 while True:
     message = is_nick_fired()
     update_display(message)
-    time.sleep(60)
+    time.sleep(900)
