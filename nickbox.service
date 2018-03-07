@@ -1,0 +1,11 @@
+[Unit]
+Description=Nick Box
+
+[Service]
+Type=idle
+WorkingDirectory=/home/pi/nickbox
+ExecStart=/usr/bin/python /home/pi/nickbox/nickbox.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
