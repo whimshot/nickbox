@@ -9,9 +9,12 @@ import Adafruit_CharLCD as LCD
 import RPi.GPIO as GPIO
 from lxml import html
 
+hire_btn = 12
+fire_btn = 26
+
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(hire_btn, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(fire_btn, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Raspberry Pi pin configuration:
 # LCD to RPI connections.
@@ -84,8 +87,10 @@ def fire_nick(channel):
         update_display(message)
 
 
-GPIO.add_event_detect(12, GPIO.FALLING, callback=hire_nick, bouncetime=300)
-GPIO.add_event_detect(26, GPIO.FALLING, callback=fire_nick, bouncetime=300)
+GPIO.add_event_detect(hire_btn, GPIO.FALLING,
+                      callback=hire_nick, bouncetime=300)
+GPIO.add_event_detect(fire_btn, GPIO.FALLING,
+                      callback=fire_nick, bouncetime=300)
 update_display('Checking Status')
 
 while True:
