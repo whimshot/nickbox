@@ -51,6 +51,8 @@ def is_nick_fired():
 def update_display(message):
     '''update the lcd display with message'''
     lcd.clear()
+    lcd.message('Nick Is')
+    lcd.set_cursor(0, 1)
     lcd.message(message)
 
 
