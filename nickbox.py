@@ -1,5 +1,4 @@
 '''A simple program to drive buttons to hire and fire Nick'''
-import atexit
 import socket
 import time
 
@@ -87,13 +86,6 @@ def fire_nick(channel):
     finally:
         update_display(message)
 
-
-def shutdown():
-    '''trigger on shutdown and update lcd'''
-    lcd.clear()
-    lcd.message('Shutting Down')
-
-atexit.register(shutdown)
 
 GPIO.add_event_detect(hire_btn, GPIO.FALLING,
                       callback=hire_nick, bouncetime=300)
