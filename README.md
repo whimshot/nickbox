@@ -2,6 +2,7 @@
 
 A box for nick
 
+![A box for Nick](/nickbox.jpg "A box for Nick")
 
 ## The Hardware
 
