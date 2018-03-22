@@ -12,6 +12,9 @@ from lxml import html
 hire_btn = 12
 fire_btn = 26
 
+green_is_down = False
+red_is_down = False
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(hire_btn, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(fire_btn, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -51,6 +54,36 @@ def is_nick_fired():
         return message
 
 
+def green_down():
+    '''The green button falling.'''
+    try:
+        green_is_down = True
+    except Exception as e:
+        raise
+    finally:
+        if (green_is_down and red_is_down):
+            lcd.clear()
+            lcd.message('Stop being')
+            lcd.set_cursor(0, 1)
+            lcd.message('a smartass!!!')
+            time.sleep(30)
+
+
+def red_down():
+    '''The red button falling.'''
+    try:
+        red_is_down = True
+    except Exception as e:
+        raise
+    finally:
+        if (green_is_down and red_is_down):
+            lcd.clear()
+            lcd.message('Stop being')
+            lcd.set_cursor(0, 1)
+            lcd.message('a smartass!!!')
+            time.sleep(30)
+
+
 def update_display(message):
     '''update the lcd display with message'''
     lcd.clear()
@@ -70,6 +103,7 @@ def hire_nick(channel):
             socket.timeout):
         message = 'Connect Failed'
     finally:
+        green_is_down = False
         update_display(message)
 
 
@@ -84,12 +118,17 @@ def fire_nick(channel):
             socket.timeout):
         message = 'Connect Failed'
     finally:
+        red_is_down = False
         update_display(message)
 
 
 GPIO.add_event_detect(hire_btn, GPIO.FALLING,
+                      callback=green_down, bouncetime=300)
+GPIO.add_event_detect(hire_btn, GPIO.RISING,
                       callback=hire_nick, bouncetime=300)
 GPIO.add_event_detect(fire_btn, GPIO.FALLING,
+                      callback=red_down, bouncetime=300)
+GPIO.add_event_detect(fire_btn, GPIO.RISING,
                       callback=fire_nick, bouncetime=300)
 update_display('Checking Status')
 
