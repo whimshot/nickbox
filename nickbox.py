@@ -66,53 +66,35 @@ def update_display(message):
 
 def hire_button_pressed(channel):
     try:
-        if ( (not GPIO.input(fire_btn)) and (not GPIO.input(hire_btn)) ):
-            update_display('Stop being a\nSMARTASS!')
-            time.sleep(30)
-        else:
-            try:
-                requests.post('http://isnickfired.com/status/notfired')
-                time.sleep(1)
-                message = 'Nick is\n' + is_nick_fired()
-            except (requests.exceptions.ConnectionError,
-                    urllib3.exceptions.NewConnectionError,
-                    urllib3.exceptions.MaxRetryError,
-                    socket.timeout):
-                message = 'Connection\nFailed'
-            finally:
-                update_display(message)
-    except Exception:
-        raise
+        requests.post('http://isnickfired.com/status/notfired')
+        time.sleep(1)
+        message = 'Nick is\n' + is_nick_fired()
+    except (requests.exceptions.ConnectionError,
+            urllib3.exceptions.NewConnectionError,
+            urllib3.exceptions.MaxRetryError,
+            socket.timeout):
+        message = 'Connection\nFailed'
     finally:
-        pass
+        update_display(message)
 
 
 def fire_button_pressed(channel):
     try:
-        if ( (not GPIO.input(fire_btn)) and (not GPIO.input(hire_btn)) ):
-            update_display('Stop being a\nSMARTASS!')
-            time.sleep(30)
-        else:
-            try:
-                requests.post('http://isnickfired.com/status/fired/nickbox')
-                time.sleep(1)
-                message = 'Nick is\n' + is_nick_fired()
-            except (requests.exceptions.ConnectionError,
-                    urllib3.exceptions.NewConnectionError,
-                    urllib3.exceptions.MaxRetryError,
-                    socket.timeout):
-                message = 'Connection\nFailed'
-            finally:
-                update_display(message)
-    except Exception:
-        raise
+        requests.post('http://isnickfired.com/status/fired/nickbox')
+        time.sleep(1)
+        message = 'Nick is\n' + is_nick_fired()
+    except (requests.exceptions.ConnectionError,
+            urllib3.exceptions.NewConnectionError,
+            urllib3.exceptions.MaxRetryError,
+            socket.timeout):
+        message = 'Connection\nFailed'
     finally:
-        pass
+        update_display(message)
 
 
-GPIO.add_event_detect(hire_btn, GPIO.BOTH,
+GPIO.add_event_detect(hire_btn, GPIO.FALLING,
                       callback=hire_button_pressed, bouncetime=300)
-GPIO.add_event_detect(fire_btn, GPIO.BOTH,
+GPIO.add_event_detect(fire_btn, GPIO.FALLING,
                       callback=fire_button_pressed, bouncetime=300)
 update_display('Checking Status')
 
