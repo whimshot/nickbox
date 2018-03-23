@@ -65,6 +65,7 @@ def update_display(message):
 
 
 def hire_button_pressed(channel):
+    print('hire pressed')
     try:
         requests.post('http://isnickfired.com/status/notfired')
         time.sleep(1)
@@ -79,6 +80,7 @@ def hire_button_pressed(channel):
 
 
 def fire_button_pressed(channel):
+    print('fire pressed')
     try:
         requests.post('http://isnickfired.com/status/fired/nickbox')
         time.sleep(1)
