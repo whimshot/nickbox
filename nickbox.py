@@ -67,9 +67,12 @@ def update_display(message):
 def hire_button_pressed(channel):
     print('hire pressed')
     try:
-        requests.post('http://isnickfired.com/status/notfired')
-        time.sleep(1)
-        message = 'Nick is\n' + is_nick_fired()
+        if (not (GPIO.input(hire_btn)) and not (GPIO.input(fire_btn))):
+            message = 'Stop being a\nSMARTASS!'
+        else:
+            requests.post('http://isnickfired.com/status/notfired')
+            time.sleep(1)
+            message = 'Nick is\n' + is_nick_fired()
     except (requests.exceptions.ConnectionError,
             urllib3.exceptions.NewConnectionError,
             urllib3.exceptions.MaxRetryError,
@@ -82,9 +85,12 @@ def hire_button_pressed(channel):
 def fire_button_pressed(channel):
     print('fire pressed')
     try:
-        requests.post('http://isnickfired.com/status/fired/nickbox')
-        time.sleep(1)
-        message = 'Nick is\n' + is_nick_fired()
+        if (not (GPIO.input(hire_btn)) and not (GPIO.input(fire_btn))):
+            message = 'Stop being a\nSMARTASS!'
+        else:
+            requests.post('http://isnickfired.com/status/fired/nickbox')
+            time.sleep(1)
+            message = 'Nick is\n' + is_nick_fired()
     except (requests.exceptions.ConnectionError,
             urllib3.exceptions.NewConnectionError,
             urllib3.exceptions.MaxRetryError,
