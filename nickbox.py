@@ -66,7 +66,7 @@ def update_display(message):
 
 def hire_button_pressed(channel):
     try:
-        if (GPIO.input(fire_btn) and GPIO.input(hire_btn)):
+        if (!(GPIO.input(fire_btn) and GPIO.input(hire_btn))):
             update_display('Stop being a\nSMARTASS!')
             sleep(30)
         else:
@@ -89,7 +89,7 @@ def hire_button_pressed(channel):
 
 def fire_button_pressed(channel):
     try:
-        if (GPIO.input(fire_btn) and GPIO.input(hire_btn)):
+        if (!(GPIO.input(fire_btn) and GPIO.input(hire_btn))):
             update_display('Stop being a\nSMARTASS!')
             sleep(30)
         else:
