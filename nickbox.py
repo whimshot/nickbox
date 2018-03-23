@@ -15,6 +15,10 @@ fire_btn = 26
 green_is_down = False
 red_is_down = False
 
+hire_down = False
+fire_down = False
+
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(hire_btn, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(fire_btn, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -54,89 +58,65 @@ def is_nick_fired():
         return message
 
 
-def green_down():
-    '''The green button falling.'''
-    try:
-        print('Green Down')
-        green_is_down = True
-    except Exception as e:
-        raise
-    finally:
-        if (green_is_down and red_is_down):
-            lcd.clear()
-            lcd.message('Stop being')
-            lcd.set_cursor(0, 1)
-            lcd.message('a smartass!!!')
-            time.sleep(30)
-
-
-def red_down():
-    '''The red button falling.'''
-    try:
-        print('Red Down')
-        red_is_down = True
-    except Exception as e:
-        raise
-    finally:
-        if (green_is_down and red_is_down):
-            lcd.clear()
-            lcd.message('Stop being')
-            lcd.set_cursor(0, 1)
-            lcd.message('a smartass!!!')
-            time.sleep(30)
-
-
 def update_display(message):
     '''update the lcd display with message'''
     lcd.clear()
-    lcd.message('Nick Is')
-    lcd.set_cursor(0, 1)
     lcd.message(message)
 
 
-def hire_nick(channel):
-    '''Callback for button to hire Nick'''
-    green_is_down = False
-    print('Green Up')
+def hire_button_pressed():
     try:
-        requests.post('http://isnickfired.com/status/notfired')
-        message = is_nick_fired()
-    except (requests.exceptions.ConnectionError,
-            urllib3.exceptions.NewConnectionError,
-            urllib3.exceptions.MaxRetryError,
-            socket.timeout):
-        message = 'Connect Failed'
+        if (GPIO.input(fire_btn) and GPIO.input(hire_btn)):
+            update_display('Stop being a\nSMARTASS!')
+            sleep(30)
+        else
+            try:
+                requests.post('http://isnickfired.com/status/notfired')
+                sleep(1)
+                message = 'Nick is\n' + is_nick_fired()
+            except (requests.exceptions.ConnectionError,
+                    urllib3.exceptions.NewConnectionError,
+                    urllib3.exceptions.MaxRetryError,
+                    socket.timeout):
+                message = 'Connection\nFailed'
+            finally:
+                update_display(message)
+    except Exception:
+        raise
     finally:
-        update_display(message)
+        pass
 
 
-def fire_nick(channel):
-    '''Callback for buttonn to fire Nick'''
-    red_is_down = False
-    print('Red Up')
+def fire_button_pressed():
     try:
-        requests.post('http://isnickfired.com/status/fired')
-        message = is_nick_fired()
-    except (requests.exceptions.ConnectionError,
-            urllib3.exceptions.NewConnectionError,
-            urllib3.exceptions.MaxRetryError,
-            socket.timeout):
-        message = 'Connect Failed'
+        if (GPIO.input(fire_btn) and GPIO.input(hire_btn)):
+            update_display('Stop being a\nSMARTASS!')
+            sleep(30)
+        else
+            try:
+                requests.post('http://isnickfired.com/status/fired/nickbox')
+                sleep(1)
+                message = 'Nick is\n' + is_nick_fired()
+            except (requests.exceptions.ConnectionError,
+                    urllib3.exceptions.NewConnectionError,
+                    urllib3.exceptions.MaxRetryError,
+                    socket.timeout):
+                message = 'Connection\nFailed'
+            finally:
+                update_display(message)
+    except Exception:
+        raise
     finally:
-        update_display(message)
+        pass
 
 
-GPIO.add_event_detect(hire_btn, GPIO.FALLING,
-                      callback=green_down, bouncetime=300)
-GPIO.add_event_detect(hire_btn, GPIO.RISING,
-                      callback=hire_nick, bouncetime=300)
-GPIO.add_event_detect(fire_btn, GPIO.FALLING,
-                      callback=red_down, bouncetime=300)
+GPIO.add_event_detect(hire_btn, GPIO.BOTH,
+                      callback=hire_button_pressed, bouncetime=300)
 GPIO.add_event_detect(fire_btn, GPIO.RISING,
-                      callback=fire_nick, bouncetime=300)
+                      callback=fire_button_pressed, bouncetime=300)
 update_display('Checking Status')
 
 while True:
-    message = is_nick_fired()
+    message = 'Nick is\n' + is_nick_fired()
     update_display(message)
     time.sleep(900)
