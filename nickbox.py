@@ -64,7 +64,7 @@ def update_display(message):
     lcd.message(message)
 
 
-def hire_button_pressed():
+def hire_button_pressed(channel):
     try:
         if (GPIO.input(fire_btn) and GPIO.input(hire_btn)):
             update_display('Stop being a\nSMARTASS!')
@@ -87,7 +87,7 @@ def hire_button_pressed():
         pass
 
 
-def fire_button_pressed():
+def fire_button_pressed(channel):
     try:
         if (GPIO.input(fire_btn) and GPIO.input(hire_btn)):
             update_display('Stop being a\nSMARTASS!')
