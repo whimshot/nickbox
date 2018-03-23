@@ -112,7 +112,7 @@ def fire_button_pressed(channel):
 
 GPIO.add_event_detect(hire_btn, GPIO.BOTH,
                       callback=hire_button_pressed, bouncetime=300)
-GPIO.add_event_detect(fire_btn, GPIO.RISING,
+GPIO.add_event_detect(fire_btn, GPIO.BOTH,
                       callback=fire_button_pressed, bouncetime=300)
 update_display('Checking Status')
 
