@@ -53,7 +53,7 @@ def is_nick_fired():
             urllib3.exceptions.NewConnectionError,
             urllib3.exceptions.MaxRetryError,
             socket.timeout):
-        message = 'Connect Failed'
+        message = 'Connection\nFailed'
     finally:
         return message
 
@@ -66,13 +66,13 @@ def update_display(message):
 
 def hire_button_pressed(channel):
     try:
-        if ( not (GPIO.input(fire_btn) and GPIO.input(hire_btn)) ):
+        if ( (not GPIO.input(fire_btn)) and (not GPIO.input(hire_btn)) ):
             update_display('Stop being a\nSMARTASS!')
             time.sleep(30)
         else:
             try:
                 requests.post('http://isnickfired.com/status/notfired')
-                sleep(1)
+                time.sleep(1)
                 message = 'Nick is\n' + is_nick_fired()
             except (requests.exceptions.ConnectionError,
                     urllib3.exceptions.NewConnectionError,
@@ -89,13 +89,13 @@ def hire_button_pressed(channel):
 
 def fire_button_pressed(channel):
     try:
-        if ( not (GPIO.input(fire_btn) and GPIO.input(hire_btn)) ):
+        if ( (not GPIO.input(fire_btn)) and (not GPIO.input(hire_btn)) ):
             update_display('Stop being a\nSMARTASS!')
             time.sleep(30)
         else:
             try:
                 requests.post('http://isnickfired.com/status/fired/nickbox')
-                sleep(1)
+                time.sleep(1)
                 message = 'Nick is\n' + is_nick_fired()
             except (requests.exceptions.ConnectionError,
                     urllib3.exceptions.NewConnectionError,
