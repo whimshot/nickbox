@@ -69,7 +69,7 @@ def hire_button_pressed():
         if (GPIO.input(fire_btn) and GPIO.input(hire_btn)):
             update_display('Stop being a\nSMARTASS!')
             sleep(30)
-        else
+        else:
             try:
                 requests.post('http://isnickfired.com/status/notfired')
                 sleep(1)
@@ -92,7 +92,7 @@ def fire_button_pressed():
         if (GPIO.input(fire_btn) and GPIO.input(hire_btn)):
             update_display('Stop being a\nSMARTASS!')
             sleep(30)
-        else
+        else:
             try:
                 requests.post('http://isnickfired.com/status/fired/nickbox')
                 sleep(1)
