@@ -57,6 +57,7 @@ def is_nick_fired():
 def green_down():
     '''The green button falling.'''
     try:
+        print('Green Down')
         green_is_down = True
     except Exception as e:
         raise
@@ -72,6 +73,7 @@ def green_down():
 def red_down():
     '''The red button falling.'''
     try:
+        print('Red Down')
         red_is_down = True
     except Exception as e:
         raise
@@ -94,6 +96,8 @@ def update_display(message):
 
 def hire_nick(channel):
     '''Callback for button to hire Nick'''
+    green_is_down = False
+    print('Green Up')
     try:
         requests.post('http://isnickfired.com/status/notfired')
         message = is_nick_fired()
@@ -103,12 +107,13 @@ def hire_nick(channel):
             socket.timeout):
         message = 'Connect Failed'
     finally:
-        green_is_down = False
         update_display(message)
 
 
 def fire_nick(channel):
     '''Callback for buttonn to fire Nick'''
+    red_is_down = False
+    print('Red Up')
     try:
         requests.post('http://isnickfired.com/status/fired')
         message = is_nick_fired()
@@ -118,7 +123,6 @@ def fire_nick(channel):
             socket.timeout):
         message = 'Connect Failed'
     finally:
-        red_is_down = False
         update_display(message)
 
 
